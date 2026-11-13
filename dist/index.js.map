@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","names":["packageManifest.version"],"sources":["../package.json","../src/index.ts"],"sourcesContent":["","import packageManifest from \"../package.json\" with { type: \"json\" };\n\nconsole.log(`Using release-change/action ${packageManifest.version}`);\n"],"mappings":"ACEA,QAAQ,IAAI,mCAAwD,E"}
