@@ -1,0 +1,6 @@
+name: release-change GitHub Action
+description: GitHub Action to run release-change
+
+runs:
+  using: node24
+  main: dist/index.js
