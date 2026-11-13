@@ -1,0 +1,70 @@
+name: Publish
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+concurrency:
+  group: release-major-tag
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Build and publish to version branch
+    if: >-
+      github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'chore: release version package')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Create GitHub App token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        id: app-token
+        with:
+          client-id: ${{ vars.APP_CLIENT_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          permission-contents: write
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          token: ${{ steps.app-token.outputs.token }}
+          ref: main
+          fetch-depth: 0
+      - name: Install pnpm and setup Node.js
+        uses: ./.github/actions/pnpm-node
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Run tests
+        run: pnpm test
+      - name: Build
+        run: pnpm build
+      - name: Publish to marketplace
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          set -euo pipefail
+          VERSION="$(jq -r .version package.json)"
+          MAJOR="${VERSION%%.*}"
+          TAG="v${VERSION}"
+          MAJOR_BRANCH="v${MAJOR}"
+          git config user.name "release-change[bot]"
+          git config user.email "293970894+release-change[bot]@users.noreply.github.com"
+          git switch -C "${MAJOR_BRANCH}"
+          git add --force dist
+          if git diff --cached --quiet; then
+            echo "Nothing to commit — dist/ is missing or empty." >&2
+            exit 1
+          fi
+          git commit -m "build: v${VERSION}"
+          git tag -f "${TAG}" HEAD
+          gh auth setup-git
+          git push origin "refs/heads/${MAJOR_BRANCH}" --force
+          git push origin "refs/tags/${TAG}" --force
+          echo "Branch ${MAJOR_BRANCH} and tag ${TAG} -> $(git rev-parse HEAD)"

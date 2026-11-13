@@ -1,0 +1,52 @@
+{
+  "name": "@release-change/action",
+  "version": "0.0.0",
+  "private": true,
+  "description": "GitHub Action to run release-change",
+  "keywords": [
+    "github-action",
+    "github-actions",
+    "release-change"
+  ],
+  "homepage": "https://github.com/release-change/action",
+  "bugs": {
+    "url": "https://github.com/release-change/action/issues"
+  },
+  "author": "Victor Brito (https://victor-brito.dev)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/release-change/action.git"
+  },
+  "type": "module",
+  "license": "MIT",
+  "exports": "./dist/index.js",
+  "engines": {
+    "node": "^24.0.0 || ^26.0.0",
+    "pnpm": ">=11.1.3"
+  },
+  "scripts": {
+    "biome": "biome check --write .",
+    "biome:check": "biome check .",
+    "biome:format": "biome format --write .",
+    "biome:format:check": "biome format .",
+    "biome:lint": "biome lint --write .",
+    "biome:lint:check": "biome lint .",
+    "build": "tsc --noEmit && rolldown -c",
+    "dev": "pnpm tsc:watch & pnpm test:watch",
+    "prepare": "husky",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "tsc": "tsc",
+    "tsc:watch": "tsc --watch --preserveWatchOutput"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.7",
+    "@commitlint/cli": "21.2.4",
+    "@commitlint/config-conventional": "21.2.4",
+    "@types/node": "26.6.6",
+    "husky": "9.1.7",
+    "rolldown": "1.3.2",
+    "typescript": "7.0.2",
+    "vitest": "5.1.0"
+  }
+}
