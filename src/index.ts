@@ -1,3 +1,9 @@
-import packageManifest from "../package.json" with { type: "json" };
+import * as core from "@actions/core";
 
-console.log(`Using release-change/action ${packageManifest.version}`);
+import { run } from "./run.js";
+
+try {
+  await run();
+} catch (error) {
+  core.setFailed(error instanceof Error ? error.message : String(error));
+}

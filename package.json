@@ -39,6 +39,10 @@
     "tsc": "tsc",
     "tsc:watch": "tsc --watch --preserveWatchOutput"
   },
+  "dependencies": {
+    "@actions/core": "3.0.1",
+    "@release-change/get-packages": "0.5.2"
+  },
   "devDependencies": {
     "@biomejs/biome": "2.6.8",
     "@commitlint/cli": "21.2.4",

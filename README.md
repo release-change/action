@@ -11,10 +11,33 @@ GitHub Action to run release-change
 
 This action runs [release-change](https://github.com/release-change/release-change) in a CI environment when any changes in the codebase are pushed to any of the branches on which releases should happen. If a release is made, it then publishes it to NPM, creates a release pull request and comments on the issues and pull requests which are concerned by the release.
 
+## Requirements
+
+- [Job permissions](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idpermissions):
+  - `contents: write`: to publish a GitHub release and commit release commits,
+  - `issues: write`: to comment on issues,
+  - `pull-requests: write`: to comment on pull requests and create release pull requests,
+  - `id-token: write`: if using [trusted publishing](https://docs.npmjs.com/trusted-publishers);
+- [workflow triggers](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows): `push` with the `branches` filter listing the branches on which releases should happen.
+
+> [!IMPORTANT]
+> Since release-change relies on [the `branches` configuration option](https://github.com/release-change/release-change/blob/main/README.md#branches), make sure the `branches` filter only lists branches which are included in this option: otherwise, there will not be any releases.
+
+> [!NOTE]
+> In your repository settings, in _Actions > General_, also make sure the _Allow GitHub Actions to create and approve pull requests_ option is enabled.
+
 ## Usage
 
 > [!IMPORTANT]
 > It is not recommended to both use this action and install the [release-change GitHub App](https://github.com/apps/release-change): every push to the branches on which releases should happen will trigger two concurrent runs of release-change.
+
+> [!IMPORTANT]
+> To use a custom GitHub token, pass it explicitly through the `github-token` input:
+> ```yaml
+> with:
+>   github-token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+> ```
+> To set the `GITHUB_TOKEN` environment variable does not configure the action.
 
 ### Workflow examples
 
@@ -178,9 +201,8 @@ Create a workflow file (you can call it `release.yml`) and save it in the `.gith
               run: pnpm clean-install
             - name: Release and publish to NPM
               uses: release-change/action@v0
-              env:
-                NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-                NPM_CONFIG_PROVENANCE: true # to be able to publish to NPM with provenance
+              with:
+                npm-token: ${{ secrets.NPM_TOKEN }}
 - using `yarn`:
 
       name: Release
@@ -230,9 +252,8 @@ Create a workflow file (you can call it `release.yml`) and save it in the `.gith
               run: yarn install --immutable
             - name: Release and publish to NPM
               uses: release-change/action@v0
-              env:
-                NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-                NPM_CONFIG_PROVENANCE: true # to be able to publish to NPM with provenance
+              with:
+                npm-token: ${{ secrets.NPM_TOKEN }}
 - using `npm`:
 
       name: Release
@@ -267,9 +288,15 @@ Create a workflow file (you can call it `release.yml`) and save it in the `.gith
               run: npm clean-install
             - name: Release and publish to NPM
               uses: release-change/action@v0
-              env:
-                NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-                NPM_CONFIG_PROVENANCE: true # to be able to publish to NPM with provenance
+              with:
+                npm-token: ${{ secrets.NPM_TOKEN }}
+## API
+
+| Inputs         | Description                                                                                                                                    |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `github-token` | The GitHub token to use for authentication. Defaults to the token provided by GitHub. To use a custom token, pass it explicitly to this input. |
+| `npm-token`    | The token to use to publish to NPM without trust publishing.                                                                                   |
+
 ## Get help
 
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/release-change)

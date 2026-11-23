@@ -7,6 +7,13 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@actions/core':
+        specifier: 3.0.1
+        version: 3.0.1
+      '@release-change/get-packages':
+        specifier: 0.5.2
+        version: 0.5.2
     devDependencies:
       '@biomejs/biome':
         specifier: 2.6.8
@@ -34,6 +41,18 @@ importers:
         version: 5.1.1(@types/node@26.6.6)(vite@8.3.8(@types/node@26.6.6)(jiti@2.7.0))
 
 packages:
+
+  '@actions/core@3.0.1':
+    resolution: {integrity: sha512-a6d/Nwahm9fliVGRhdhofo40HjHQasUPusmc7vBfyky+7Z+P2A1J68zyFVaNcEclc/Se+eO595oAr5nwEIoIUA==}
+
+  '@actions/exec@3.0.0':
+    resolution: {integrity: sha512-6xH/puSoNBXb72VPlZVm7vQ+svQpFyA96qdDBvhB8eNZOE8LtPf9L4oAsfzK/crCL8YZ+19fKYVnM63Sl+Xzlw==}
+
+  '@actions/http-client@4.0.1':
+    resolution: {integrity: sha512-+Nvd1ImaOZBSoPbsUtEhv+1z99H12xzncCkz0a3RuehINE81FZSe2QTj3uvAPTcJX/SCzUQHQ0D1GrPMbrPitg==}
+
+  '@actions/io@3.0.2':
+    resolution: {integrity: sha512-nRBchcMM+QK1pdjO7/idu86rbJI5YHUKCvKs0KxnSYbVe3F51UfGxuZX4Qy/fWlp6l7gWFwIkrOzN+oUK03kfw==}
 
   '@babel/code-frame@7.29.7':
     resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
@@ -228,6 +247,26 @@ packages:
 
   '@oxc-project/types@0.159.0':
     resolution: {integrity: sha512-QWjWhxheluOJ82kDHNyps00UvRpQCtI34B5A/SzpgQycUD/79FuvT4I0aQIfE/bdPwKmX4QPftnywFBH6FxJhQ==}
+
+  '@release-change/config@0.5.1':
+    resolution: {integrity: sha512-PgtK6meMX318v7PzL9FwS/42zHSQ89f4Ir6AU6Ep1A9+cZ0viXjl13I7BFEUuZRysnF+Q0CEgg2o63e8SFP4bg==}
+    engines: {node: ^22.12.0 || ^24.0.0 || ^26.0.0, npm: '>=10.9.0', pnpm: '>=11.1.3', yarn: '>=4.10.3'}
+
+  '@release-change/get-packages@0.5.2':
+    resolution: {integrity: sha512-aN/26uGA3bDH0g4kHJtz2PztuIe8Ii0LgGGmrKjwqSN4ajcXODMGSFbgheWq2X2dy6ww8UK9OUnBrEJQpnMKVw==}
+    engines: {node: ^22.12.0 || ^24.0.0 || ^26.0.0, npm: '>=10.9.0', pnpm: '>=11.1.3', yarn: '>=4.10.3'}
+
+  '@release-change/logger@0.5.1':
+    resolution: {integrity: sha512-R4AxyhrX9u8KKXwPcJUbQmJJBuE/Tc8FjoSDrfcMnRIDcfeUIXehMvUUQi3Q9sk62yN2OXf/YjtIAE4/NFduVQ==}
+    engines: {node: ^22.12.0 || ^24.0.0 || ^26.0.0, npm: '>=10.9.0', pnpm: '>=11.1.3', yarn: '>=4.10.3'}
+
+  '@release-change/semver@0.3.2':
+    resolution: {integrity: sha512-NMraa/p30s4KYQ876Z0uG+2nu/rFSWxhFSSWRwNm52C2wQGzCAYE8YCxaFXqylCQRckmyN1d4vspxFc8TMHCbA==}
+    engines: {node: ^22.12.0 || ^24.0.0 || ^26.0.0, npm: '>=10.9.0', pnpm: '>=11.1.3', yarn: '>=4.10.3'}
+
+  '@release-change/shared@0.5.1':
+    resolution: {integrity: sha512-2WsWyYeSBGky0avaWphn4tghdgzYQoVLW2iDqzNozGhhyTu74V57PklWHzVIBKTYu7LIurbWVTjyHxTgvIYLSg==}
+    engines: {node: ^22.12.0 || ^24.0.0 || ^26.0.0, npm: '>=10.9.0', pnpm: '>=11.1.3', yarn: '>=4.10.3'}
 
   '@rolldown/binding-android-arm-eabi@1.2.19':
     resolution: {integrity: sha512-e+Ebe0WT+9tbXmNKPIiC8YrWAHYwug3m6i4p3rZGGulfZri1jtI4HslT+OZnFf/OIHowWF71DTlHwXBP2SiA7A==}
@@ -916,6 +955,10 @@ packages:
   tslib@2.9.1:
     resolution: {integrity: sha512-a4Ux9VKuIMHsOS7ENbEq6hK2ZGYIT27Rtl0E4eD9KqwxhKiQeMZE/9xb3IdYwWaSOyIBQLExhQgXDTYoiCxnWA==}
 
+  tunnel@0.0.6:
+    resolution: {integrity: sha512-1h/Lnq9yajKY2PEbBadPXj3VxsDDu844OnaAo52UVmIzIvwwtBPIuNvkjuzBlTWpfJyUbG3ez0KSBibQkj4ojg==}
+    engines: {node: '>=0.6.11 <=0.7.0 || >=0.7.3'}
+
   typescript@7.0.2:
     resolution: {integrity: sha512-8FYau96o3NKOhbjKi/qNvG/W5jhzxkbdm5sj9AbZ/5T5sWqn3hJgLfGx27sRKZWTvyzCP8dLRBTf5tBTSRVUNA==}
     engines: {node: '>=16.20.0'}
@@ -923,6 +966,10 @@ packages:
 
   undici-types@8.9.0:
     resolution: {integrity: sha512-KTDyRTYX8sWmKXAikPHHSyc63CRPETMctyjKFupcC6OBLXT3xsN0e9aF7m+mIXutFWpUXuedtowG7iLOzp0kQg==}
+
+  undici@6.29.1:
+    resolution: {integrity: sha512-EvRlUt/QqAEvXdQeRMYUfwOQsfzpDztykrG2owGEE/rBOBoYv9uF39ZzsNDh4lTFHhTr2XOZjKkYgueD12ZmGA==}
+    engines: {node: '>=18.17'}
 
   verkit@0.5.0:
     resolution: {integrity: sha512-u4J1hr6Y+C/hit34GwL3eIcUf3wngT8TlYUjK7tk0jxydKLAq3sYvifjdTDA6U3KCKRcQCQDGf/srjxfZF3l7g==}
@@ -1034,6 +1081,22 @@ packages:
     engines: {node: ^20.19.0 || ^22.12.0 || >=23}
 
 snapshots:
+
+  '@actions/core@3.0.1':
+    dependencies:
+      '@actions/exec': 3.0.0
+      '@actions/http-client': 4.0.1
+
+  '@actions/exec@3.0.0':
+    dependencies:
+      '@actions/io': 3.0.2
+
+  '@actions/http-client@4.0.1':
+    dependencies:
+      tunnel: 0.0.6
+      undici: 6.29.1
+
+  '@actions/io@3.0.2': {}
 
   '@babel/code-frame@7.29.7':
     dependencies:
@@ -1238,6 +1301,26 @@ snapshots:
   '@oxc-project/types@0.156.0': {}
 
   '@oxc-project/types@0.159.0': {}
+
+  '@release-change/config@0.5.1':
+    dependencies:
+      '@release-change/logger': 0.5.1
+      '@release-change/shared': 0.5.1
+
+  '@release-change/get-packages@0.5.2':
+    dependencies:
+      '@release-change/config': 0.5.1
+      '@release-change/logger': 0.5.1
+      '@release-change/semver': 0.3.2
+      '@release-change/shared': 0.5.1
+
+  '@release-change/logger@0.5.1':
+    dependencies:
+      '@release-change/shared': 0.5.1
+
+  '@release-change/semver@0.3.2': {}
+
+  '@release-change/shared@0.5.1': {}
 
   '@rolldown/binding-android-arm-eabi@1.2.19':
     optional: true
@@ -1718,6 +1801,8 @@ snapshots:
   tslib@2.9.1:
     optional: true
 
+  tunnel@0.0.6: {}
+
   typescript@7.0.2:
     optionalDependencies:
       '@typescript/typescript-aix-ppc64': 7.0.2
@@ -1742,6 +1827,8 @@ snapshots:
       '@typescript/typescript-win32-x64': 7.0.2
 
   undici-types@8.9.0: {}
+
+  undici@6.29.1: {}
 
   verkit@0.5.0: {}
 

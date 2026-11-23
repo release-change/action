@@ -4,3 +4,12 @@ description: GitHub Action to run release-change
 runs:
   using: node24
   main: dist/index.js
+
+inputs:
+  github-token:
+    description: The GitHub token to use for authentication. Defaults to the token provided by GitHub. To use a custom token, pass it explicitly to this input.
+    required: false
+    default: ${{ github.token }}
+  npm-token:
+    description: The token to use to publish to NPM without trust publishing.
+    required: false
