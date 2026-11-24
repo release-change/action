@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@actions/core": "3.0.1",
-    "@release-change/get-packages": "0.5.2"
+    "@release-change/get-packages": "0.5.3"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.8",
