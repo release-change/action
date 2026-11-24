@@ -10,6 +10,16 @@
 
 **Full changelog:** [`v0.1.1...v0.1.2`](https://github.com/release-change/action/compare/v0.1.1...v0.1.2)
 
+## 0.1.1
+
+### Patch changes
+
+- **deps:** update dependency @release-change/get-packages to v0.5.3 (#13) ([`42cc8a4`](https://github.com/release-change/action/commit/42cc8a4962d031b10afd861b61e9c3f50f29d4f1))
+
+---
+
+**Full changelog:** [`v0.1.0...v0.1.1`](https://github.com/release-change/action/compare/v0.1.0...v0.1.1)
+
 ## 0.1.0
 
 ### Minor changes
