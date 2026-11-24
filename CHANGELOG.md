@@ -1,5 +1,15 @@
 # @release-change/action
 
+## 0.1.2
+
+### Patch changes
+
+- remove `NPM_CONFIG_PROVENANCE` and `YARN_NPM_CONFIG_PROVENANCE` injections (#15) ([`fff2b15`](https://github.com/release-change/action/commit/fff2b15d0f5e027a2984c9fec0321e131f4f5b57))
+
+---
+
+**Full changelog:** [`v0.1.1...v0.1.2`](https://github.com/release-change/action/compare/v0.1.1...v0.1.2)
+
 ## 0.1.1
 
 ### Patch changes

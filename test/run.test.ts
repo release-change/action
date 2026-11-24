@@ -39,30 +39,42 @@ it("should throw an error if no valid package manager is found", async () => {
 });
 describe.each(mockedReleaseChangeCommands)(
   "when the package manager is `$packageManager`",
-  ({
-    packageManager,
-    expectedCommand,
-    expectedArgs,
-    expectedEnvWithoutNpmToken,
-    expectedEnvWithNpmToken
-  }) => {
+  ({ packageManager, expectedCommand, expectedArgs }) => {
     beforeEach(() => {
       vi.mocked(getPackageManager).mockReturnValue(packageManager);
     });
-    it("should run the `$expectedCommand` command when the NPM token is not provided", async () => {
+    it("should run the `$expectedCommand` command injecting the GitHub token", async () => {
       vi.mocked(core.getInput).mockReturnValueOnce(mockedGithubToken).mockReturnValueOnce("");
       await run();
       expect(spawn).toHaveBeenCalledWith(
         expectedCommand,
         expectedArgs,
         expect.objectContaining({
-          env: expect.objectContaining(expectedEnvWithoutNpmToken)
+          env: expect.objectContaining({
+            RELEASE_TOKEN: mockedGithubToken,
+            ISSUE_PR_TOKEN: mockedGithubToken
+          })
         })
       );
       expect(core.setSecret).toHaveBeenCalledWith(mockedGithubToken);
       expect(core.setSecret).not.toHaveBeenCalledWith(mockedNpmToken);
     });
-    it("should run the `$expectedCommand` command when the NPM token is provided", async () => {
+    it("should run the `$expectedCommand` command without injecting the NPM token when it is not provided", async () => {
+      vi.mocked(core.getInput).mockReturnValueOnce(mockedGithubToken).mockReturnValueOnce("");
+      await run();
+      expect(spawn).toHaveBeenCalledWith(
+        expectedCommand,
+        expectedArgs,
+        expect.objectContaining({
+          env: expect.not.objectContaining({
+            NPM_TOKEN: mockedNpmToken
+          })
+        })
+      );
+      expect(core.setSecret).toHaveBeenCalledWith(mockedGithubToken);
+      expect(core.setSecret).not.toHaveBeenCalledWith(mockedNpmToken);
+    });
+    it("should run the `$expectedCommand` command injecting the NPM token when it is provided", async () => {
       vi.mocked(core.getInput)
         .mockReturnValueOnce(mockedGithubToken)
         .mockReturnValueOnce(mockedNpmToken);
@@ -71,7 +83,9 @@ describe.each(mockedReleaseChangeCommands)(
         expectedCommand,
         expectedArgs,
         expect.objectContaining({
-          env: expect.objectContaining(expectedEnvWithNpmToken)
+          env: expect.objectContaining({
+            NPM_TOKEN: mockedNpmToken
+          })
         })
       );
       expect(core.setSecret).toHaveBeenCalledWith(mockedGithubToken);
