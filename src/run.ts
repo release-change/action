@@ -36,8 +36,6 @@ export const run = async (): Promise<void> => {
       if (npmToken) {
         core.setSecret(npmToken);
         additionalEnv.NPM_TOKEN = npmToken;
-        if (packageManager === "yarn") additionalEnv.YARN_NPM_CONFIG_PROVENANCE = "true";
-        else additionalEnv.NPM_CONFIG_PROVENANCE = "true";
       }
       const childProcess = spawn(command, args, {
         cwd: process.cwd(),
